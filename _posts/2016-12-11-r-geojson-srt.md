@@ -33,15 +33,6 @@ I wrapped `geojsonio` in a require because it may not be installed on your syste
 The data we are going to analyze consists of the convenient parking locations for access to the Swamp Rabbit Trail running between Greenville, SC and Traveler's Rest, SC. Though this data is located in an ArcGIS system, there is a GeoJSON version at [OpenUpstate](http://data.openupstate.org).
  
 
-{% highlight text %}
-Error in download.file(data_url, data_file): cannot open destfile 'data/srt_parking.geojson', reason 'No such file or directory'
-{% endhighlight %}
-
-
-
-{% highlight text %}
-Error: File does not exist. Create it, or fix the path.
-{% endhighlight %}
  
 Theoretically, you can use `geojson_read` to get the data from the URL directly; however this seemed to fail for me. I'm not sure why doing the two-step process with `download.file` and then `geojson_read` works, but it may be good in some workflows to download your data first anyway. Then, the `what="sp"` option in `geojson_read` is used to return the read data in a spatial object. Now that the data is in a spatial object, we can analyze however we wish, and forget about the original data format.
  
