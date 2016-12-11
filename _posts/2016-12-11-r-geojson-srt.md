@@ -33,14 +33,13 @@ I wrapped `geojsonio` in a require because it may not be installed on your syste
 The data we are going to analyze consists of the convenient parking locations for access to the Swamp Rabbit Trail running between Greenville, SC and Traveler's Rest, SC. Though this data is located in an ArcGIS system, there is a GeoJSON version at [OpenUpstate](http://data.openupstate.org).
  
 
-{% highlight text %}
-Error in download.file(data_url, data_file): cannot open destfile 'data/srt_parking.geojson', reason 'No such file or directory'
-{% endhighlight %}
-
-
-
-{% highlight text %}
-Error: File does not exist. Create it, or fix the path.
+{% highlight r %}
+data_url <- "https://data.openupstate.org/maps/swamp-rabbit-trail/parking/geojson.php"
+data_file <- "srt_parking.geojson"
+# for some reason, I can't read from the url directly, though the tutorial
+# says I can
+download.file(data_url, data_file)
+data_json <- geojson_read(data_file, what = "sp")
 {% endhighlight %}
  
 Theoretically, you can use `geojson_read` to get the data from the URL directly; however this seemed to fail for me. I'm not sure why doing the two-step process with `download.file` and then `geojson_read` works, but it may be good in some workflows to download your data first anyway. Then, the `what="sp"` option in `geojson_read` is used to return the read data in a spatial object. Now that the data is in a spatial object, we can analyze however we wish, and forget about the original data format.
@@ -50,13 +49,19 @@ Theoretically, you can use `geojson_read` to get the data from the URL directly;
 The first thing you can do is plot the data, and the `plot` command makes that easy. If you don't know what is going on behind the scenes, the `plot` command detects that it is dealing with a spatial object and calls the plot method from the `sp` package. But we just issue a simple command:
  
 
-{% highlight text %}
-Error in plot(data_json): object 'data_json' not found
+{% highlight r %}
+plot(data_json)
 {% endhighlight %}
+
+![plot of chunk unnamed-chunk-2](/figures/unnamed-chunk-2-1.png)
  
 Unfortunately, this plot is not very helpful, because it simply plots the points without any context. So we use the `ggmap` and `ggplot2` package to give us some context. First, we download from Google the right map.
  
 
+{% highlight r %}
+mapImage <- ggmap(get_googlemap(c(lon = -82.394012, lat = 34.852619), scale = 1, 
+    zoom = 11), extent = "normal")
+{% endhighlight %}
  
 I got the latitude and longitude by looking up on Google, and then hand-tuned the scale and zoom.
  
@@ -65,14 +70,9 @@ A note of warning: if you do this with a recent version of `ggmap` and `ggplot2`
 Now, we prepare our spatial object for plotting:
  
 
-{% highlight text %}
-Error in as.data.frame(data_json): object 'data_json' not found
-{% endhighlight %}
-
-
-
-{% highlight text %}
-Error in names(data_df)[4:5] <- c("lon", "lat"): object 'data_df' not found
+{% highlight r %}
+data_df <- as.data.frame(data_json)
+names(data_df)[4:5] <- c("lon", "lat")
 {% endhighlight %}
  
 There's really no output from this. I suppose the renaming step isn't necessary, either, but I believe in descriptive labels.
@@ -80,16 +80,21 @@ There's really no output from this. I suppose the renaming step isn't necessary,
 Now we can make the plot:
  
 
-{% highlight text %}
-Error in fortify(data): object 'data_df' not found
+{% highlight r %}
+print(mapImage + geom_point(aes(lon, lat), data = data_df))
 {% endhighlight %}
+
+![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-1.png)
  
 It may be helpful to add labels based on the name of the location, given in the 'title' field:
  
 
-{% highlight text %}
-Error in fortify(data): object 'data_df' not found
+{% highlight r %}
+mapImage + geom_point(aes(lon, lat), data = data_df) + geom_text(aes(lon, lat, 
+    label = title, hjust = 0, vjust = 0.5), data = data_df, check_overlap = TRUE)
 {% endhighlight %}
+
+![plot of chunk unnamed-chunk-6](/figures/unnamed-chunk-6-1.png)
  
 Here, I use `geom_text` to make the labels, and tweaked the options by hand using the help page.
  
