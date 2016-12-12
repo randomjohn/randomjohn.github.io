@@ -10,7 +10,7 @@ published: true
  
 
  
-GeoJSON is a standard text-based data format for encoding geographical information, which relies on the JSON (Javascript object notation) standard. There are a number of public datasets for Greenville, SC that use this format, and, fortunately, the [R](http://www.r-project.org) programming language makes working with these data through the [rgeojson](https://ropensci.org/tutorials/geojsonio_tutorial.html) library. Note that this is part of the [ROpenSci](https://ropensci.org) family of packages, which are useful for working with different kinds of public data.
+GeoJSON is a standard text-based data format for encoding geographical information, which relies on the JSON (Javascript object notation) standard. There are a number of public datasets for Greenville, SC that use this format, and, the [R](http://www.r-project.org) programming language makes working with these data easy. Install the [rgeojson](https://ropensci.org/tutorials/geojsonio_tutorial.html) library, which is part of the [ROpenSci](https://ropensci.org) family of packages.
  
 In this post we plot some public data in GeoJSON format on top of a retrieved Google Map. To set up we do the following:
  
@@ -27,11 +27,11 @@ library(ggmap)
 library(maptools)
 {% endhighlight %}
  
-I wrapped `geojsonio` in a require because it may not be installed on your system. Geojsonio takes most of the work out of dealing with GeoJSON data, thus allowing you to concentrate on your analysis rather than data manipulation to a great extent. There is still some data manipulation to be done, as seen below, but as these things go, it's fairly lightweight.
+I wrapped `geojsonio` in a require because it may not be installed on your system. Geojsonio takes most of the work out of dealing with GeoJSON data, thus allowing you to concentrate on your analysis rather than data manipulation to a great extent. There is still some data manipulation to be done, as seen below, but it's fairly lightweight.
  
 ## Getting the data
  
-The data we are going to analyze consists of the convenient parking locations for access to the Swamp Rabbit Trail running between Greenville, SC and Traveler's Rest, SC. Though this data is located in an ArcGIS system, there is a GeoJSON version at [OpenUpstate](http://data.openupstate.org).
+The data we are going to analyze consists of the convenient parking locations for access to the Swamp Rabbit Trail running between Greenville, SC and Traveler's Rest, SC. Though this data is located in an ArcGIS system, there is a [GeoJSON version](https://data.openupstate.org/maps/swamp-rabbit-trail/parking/geojson.php) at [OpenUpstate](http://data.openupstate.org).
  
 
 {% highlight r %}
@@ -43,7 +43,7 @@ download.file(data_url, data_file)
 data_json <- geojson_read(data_file, what = "sp")
 {% endhighlight %}
  
-Theoretically, you can use `geojson_read` to get the data from the URL directly; however this seemed to fail for me. I'm not sure why doing the two-step process with `download.file` and then `geojson_read` works, but it may be good in some workflows to download your data first anyway. Then, the `what="sp"` option in `geojson_read` is used to return the read data in a spatial object. Now that the data is in a spatial object, we can analyze however we wish, and forget about the original data format.
+Theoretically, you can use `geojson_read` to get the data from the URL directly; however this seemed to fail for me. I'm not sure why doing the two-step process with `download.file` and then `geojson_read` works, but it is probably a good idea to download your data first in most cases. The `what="sp"` option in `geojson_read` is used to return the data in a spatial object. Now that the data is in a spatial object, we can analyze however we wish and forget about the original data format.
  
 ## Analyzing the data
  
@@ -56,7 +56,7 @@ plot(data_json)
 
 ![plot of chunk unnamed-chunk-2](/figures/unnamed-chunk-2-1.png)
  
-Unfortunately, this plot is not very helpful, because it simply plots the points without any context. So we use the `ggmap` and `ggplot2` package to give us some context. First, we download from Google the right map.
+Unfortunately, this plot is not very helpful because it simply plots the points without any context. So we use the `ggmap` and `ggplot2` package to give us some context. First, we download from Google the right map.
  
 
 {% highlight r %}
@@ -76,7 +76,7 @@ data_df <- as.data.frame(data_json)
 names(data_df)[4:5] <- c("lon", "lat")
 {% endhighlight %}
  
-There's really no output from this. I suppose the renaming step isn't necessary, either, but I believe in descriptive labels.
+There's really no output from this. I suppose the renaming step isn't necessary, but I believe in descriptive labels.
  
 Now we can make the plot:
  
