@@ -1,8 +1,8 @@
 ---
+layout: post
 title: "Plotting GeoJSON data on a map with R"
 author: "John Johnson"
 date: "December 11, 2016"
-output: html_document
 status: publish
 published: true
 ---
