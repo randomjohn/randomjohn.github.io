@@ -15,6 +15,6 @@ permalink: /blogroll/
 
 ## Statistics
 
-* [Realizations in Biostatistcs](http://realizationsinbiostatistics.blogspot.com) (my other blog)
+* [Realizations in Biostatistics](http://realizationsinbiostatistics.blogspot.com) (my other blog)
 * [Statblogs](http://www.statblogs.com)
 * [Andrew Gelman](http://andrewgelman.com/)
