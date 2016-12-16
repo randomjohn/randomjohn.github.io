@@ -5,6 +5,8 @@ author: "John Johnson"
 date: "December 11, 2016"
 status: publish
 published: true
+categories: Greenville
+tags: ggplot geojson maps
 ---
  
  
