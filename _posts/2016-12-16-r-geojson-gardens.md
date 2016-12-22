@@ -38,7 +38,24 @@ data_file <- "parks.geojson"
 # for some reason, I can't read from the url directly, though the tutorial
 # says I can
 download.file(data_url, data_file)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in download.file(data_url, data_file): cannot open URL 'https://data.openupstate.org/maps/city-parks/parks.php'
+{% endhighlight %}
+
+
+
+{% highlight r %}
 data_park <- geojson_read(data_file, what = "sp")
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in rgdal::ogrListLayers(input): Cannot open data source
 {% endhighlight %}
  
  
@@ -51,7 +68,11 @@ First, we plot the data as before:
 plot(data_park)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-2](/figures/unnamed-chunk-2-1.png)
+
+
+{% highlight text %}
+Error in plot(data_park): object 'data_park' not found
+{% endhighlight %}
  
 While this was easy to do, it doesn't give very much context. However, it does give the boundaries of the different parks. As before, we use the `ggmap` and `ggplot2` package to give us some context. First, we download from Google the right map.
  
@@ -71,6 +92,12 @@ Now, we prepare our spatial object for plotting. This is a more difficult proces
 {% highlight r %}
 data_park_df <- fortify(data_park)
 {% endhighlight %}
+
+
+
+{% highlight text %}
+Error in fortify(data_park): object 'data_park' not found
+{% endhighlight %}
  
 Now we can make the plot:
  
@@ -80,7 +107,11 @@ print(mapImage + geom_polygon(aes(long, lat, group = group), data = data_park_df
     colour = "green"))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-1.png)
+
+
+{% highlight text %}
+Error in fortify(data): object 'data_park_df' not found
+{% endhighlight %}
  
 Note the use of the `group=` option in the `geom_polygon` function above. This tells `geom_polygon` that there are many polygons rather than just one. Without that option, you get a big mess:
  
@@ -89,17 +120,45 @@ Note the use of the `group=` option in the `geom_polygon` function above. This t
 print(mapImage + geom_polygon(aes(long, lat), data = data_park_df, colour = "green"))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-6](/figures/unnamed-chunk-6-1.png)
+
+
+{% highlight text %}
+Error in fortify(data): object 'data_park_df' not found
+{% endhighlight %}
  
 ## Mashup of parking convenient to Swamp Rabbit Trail and city parks
  
 Now, say you want to combine the city parks data with the parking places convenient to Swamp Rabbit Trail that was the subject of the last post. That is very easy using the `ggplot2` package. We get the data and manipulate it as last time:
  
 
+{% highlight text %}
+Error in download.file(data_parking_url, data_parking_file): cannot open URL 'https://data.openupstate.org/maps/swamp-rabbit-trail/parking/geojson.php'
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in rgdal::ogrListLayers(input): Cannot open data source
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in as.data.frame(data_parking): object 'data_parking' not found
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Error in names(data_parking_df)[4:5] <- c("long", "lat"): object 'data_parking_df' not found
+{% endhighlight %}
  
 Next, we use the layering feature of `ggplot2` to draw the map:
  
-![plot of chunk unnamed-chunk-8](/figures/unnamed-chunk-8-1.png)
+
+{% highlight text %}
+Error in fortify(data): object 'data_parking_df' not found
+{% endhighlight %}
  
 ## Conclusions
  

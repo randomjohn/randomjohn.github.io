@@ -20,7 +20,8 @@ rmd2md <- function( path_site = getwd(),
                     url_images = "figures/",
                     out_ext='.md',
                     in_ext='.rmd',
-                    recursive=FALSE) {
+                    recursive=FALSE,
+                    process_all=FALSE) {
 
   require(knitr, quietly=TRUE, warn.conflicts=FALSE)
 
@@ -38,7 +39,7 @@ rmd2md <- function( path_site = getwd(),
         status <- unlist(strsplit(content[statusLine], ':'))[2]
         status <- sub('[[:space:]]+$', '', status)
         status <- sub('^[[:space:]]+', '', status)
-        if(tolower(status) == 'process') {
+        if(tolower(status) == 'process' || process_all) {
           #This is a bit of a hack but if a line has zero length (i.e. a
           #black line), it will be removed in the resulting markdown file.
           #This will ensure that all line returns are retained.
@@ -93,4 +94,4 @@ rmd2md <- function( path_site = getwd(),
   invisible()
 }
 
-rmd2md()
+rmd2md(process_all=TRUE)
