@@ -84,3 +84,4 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+  - rmd2md.R
