@@ -153,7 +153,7 @@ So I snuck a trick into the above graph. In bar charts presenting counts, I usua
  
 ### What users are saying
  
-To analyze what users are saying about "#yeahthatgreenville" and "#gvl", we use the `tidytext` package. There are a number of packages that can be used to analyze text, and `tm` used to be a favorite, but `tidytext` fits within the context of [tidy data](http://vita.had.co.nz/papers/tidy-data.pdf). We prefer the tidy data framework because it works with data in a specific format and has a number of powerful tools that have a specific focus but interoperate well, much like the UNIX ideal. Here, `tidytext` will allow us to use `dplyr` and similar tools using the pipe operator. The code will be easier to read and follow.
+To analyze what users are saying about "#yeahthatgreenville", we use the `tidytext` package. There are a number of packages that can be used to analyze text, and `tm` used to be a favorite, but `tidytext` fits within the context of [tidy data](http://vita.had.co.nz/papers/tidy-data.pdf). We prefer the tidy data framework because it works with data in a specific format and has a number of powerful tools that have a specific focus but interoperate well, much like the UNIX ideal. Here, `tidytext` will allow us to use `dplyr` and similar tools using the pipe operator. The code will be easier to read and follow.
  
 
 {% highlight r %}
