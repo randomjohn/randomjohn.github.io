@@ -110,7 +110,7 @@ print(gvl_twitter_unique %>% select(text))
 6        ANOTHER HATE HOAX: Black man arrested for burning Greenville church, spray... https://t.co/OS2QA1Fuz1 by #Dee2Glass via @c0nvey
 {% endhighlight %}
  
-The thing to notice here is that there are several different Greenvilles, so this makes analysis of the local area pretty hard. Many of the tweets can be about Greenville, NC or SC. In this particular dataset, there was even a Greenville Road in California (where there was a car fire). Rather than play a filtering game, it may be better to apply some knowledge specific to the area. For instance, local tweets will often be tagged with `#yeahThatgreenville`. So we will search again for the `#yeahthatgreenville`` hashtag (and add a few more tweets as well). This time, we'll keep retweets:
+The thing to notice here is that there are several different Greenvilles, so this makes analysis of the local area pretty hard. Many of the tweets can be about Greenville, NC or SC. In this particular dataset, there was even a Greenville Road in California (where there was a car fire). Rather than play a filtering game, it may be better to apply some knowledge specific to the area. For instance, local tweets will often be tagged with `#yeahThatgreenville`. So we will search again for the `#yeahthatgreenville` hashtag (and add a few more tweets as well). This time, we'll keep retweets:
  
 
 {% highlight r %}
