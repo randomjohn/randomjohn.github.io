@@ -49,6 +49,9 @@ url: https://randomjohn.github.io
 # then add in the baseurl here, like this: "/repository-name"
 baseurl: ""
 
+# fix some encoding issues
+encoding: UTF-8
+
 #
 # !! You don't need to change any of the configuration flags below !!
 #
@@ -75,7 +78,7 @@ sass:
 # Use the following plug-ins
 gems:
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
-#  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
+  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
 
 # Exclude these files from your production _site
 exclude:
