@@ -51,7 +51,7 @@ First, we plot the data as before:
 plot(data_park)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-2](/figures/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-2](/figures//2016-12-16-r-geojson-gardens.Rmdunnamed-chunk-2-1.png)
  
 While this was easy to do, it doesn't give very much context. However, it does give the boundaries of the different parks. As before, we use the `ggmap` and `ggplot2` package to give us some context. First, we download from Google the right map.
  
@@ -80,7 +80,7 @@ print(mapImage + geom_polygon(aes(long, lat, group = group), data = data_park_df
     colour = "green"))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](/figures//2016-12-16-r-geojson-gardens.Rmdunnamed-chunk-5-1.png)
  
 Note the use of the `group=` option in the `geom_polygon` function above. This tells `geom_polygon` that there are many polygons rather than just one. Without that option, you get a big mess:
  
@@ -89,7 +89,7 @@ Note the use of the `group=` option in the `geom_polygon` function above. This t
 print(mapImage + geom_polygon(aes(long, lat), data = data_park_df, colour = "green"))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-6](/figures/unnamed-chunk-6-1.png)
+![plot of chunk unnamed-chunk-6](/figures//2016-12-16-r-geojson-gardens.Rmdunnamed-chunk-6-1.png)
  
 ## Mashup of parking convenient to Swamp Rabbit Trail and city parks
  
@@ -99,7 +99,7 @@ Now, say you want to combine the city parks data with the parking places conveni
  
 Next, we use the layering feature of `ggplot2` to draw the map:
  
-![plot of chunk unnamed-chunk-8](/figures/unnamed-chunk-8-1.png)
+![plot of chunk unnamed-chunk-8](/figures//2016-12-16-r-geojson-gardens.Rmdunnamed-chunk-8-1.png)
  
 ## Conclusions
  

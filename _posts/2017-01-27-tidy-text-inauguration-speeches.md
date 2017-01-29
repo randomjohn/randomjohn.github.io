@@ -187,7 +187,7 @@ ggplot(speech_freq %>% ungroup() %>% slice(1:20), aes(reorder(word,desc(frequenc
     xlab("Word") + ylab("Frequency") + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-3](/figures/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-3](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-3-1.png)
  
  
 ## What makes speeches unique
@@ -264,7 +264,7 @@ ggplot(plot_inaug %>% filter(tf_idf > 0.025), aes(word, tf_idf, fill = Speaker))
   coord_flip()
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-4](/figures/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-4-1.png)
  
 Then we can do this analysis within each speech to find out what distinguishes them from other speeches. The `for` loop below can be used to print multiple pages of faceted graphs, good for when you are using RStudio or the R gui to explore.
  
@@ -290,7 +290,7 @@ for (i in 1:floor(length(speakers_vec)/n_panel)) {
 }
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-1.png)![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-2.png)![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-3.png)![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-4.png)![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-5.png)![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-6.png)![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-7.png)![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-8.png)![plot of chunk unnamed-chunk-5](/figures/unnamed-chunk-5-9.png)
+![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-1.png)![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-2.png)![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-3.png)![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-4.png)![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-5.png)![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-6.png)![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-7.png)![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-8.png)![plot of chunk unnamed-chunk-5](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-5-9.png)
  
 ## Which speeches are most like each other?
  
@@ -315,7 +315,7 @@ inaug_clust <- hclust(dist_matrix,method="ward.D")
 plot(inaug_clust)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-7](/figures/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-7](/figures//2017-01-27-tidy-text-inauguration-speeches.Rmdunnamed-chunk-7-1.png)
  
 It's pretty interesting that Speech 26 is unlike nearly all the others. This was William Henry Harrison discussing something about the Roman aristocracy, something other presidents have not felt the need to do very much.
  
@@ -348,13 +348,13 @@ for (i in 1:length(inaug_km$withinss)) {
 
 {% highlight text %}
 ## [1] Cluster 1      
-##  [1] government people     citizens   time       country    nation    
-##  [7] own        <NA>       <NA>       <NA>       <NA>       <NA>      
+##  [1] people     government country    own        citizens   time      
+##  [7] nation     <NA>       <NA>       <NA>       <NA>       <NA>      
 ## [13] <NA>       <NA>       <NA>       <NA>       <NA>       <NA>      
 ## [19] <NA>       <NA>      
 ## [1] Cluster 2      
-##  [1] government people     citizens   country    own        nation    
-##  [7] time       <NA>       <NA>       <NA>       <NA>       <NA>      
+##  [1] government people     citizens   time       country    nation    
+##  [7] own        <NA>       <NA>       <NA>       <NA>       <NA>      
 ## [13] <NA>       <NA>       <NA>       <NA>       <NA>       <NA>      
 ## [19] <NA>       <NA>      
 ## [1] Cluster 3      
@@ -368,16 +368,16 @@ for (i in 1:length(inaug_km$withinss)) {
 ## [13] <NA>       <NA>       <NA>       <NA>       <NA>       <NA>      
 ## [19] <NA>       <NA>      
 ## [1] Cluster 5      
-##  [1] people     government country    own        citizens   time      
-##  [7] nation     <NA>       <NA>       <NA>       <NA>       <NA>      
+##  [1] government people     citizens   country    own        nation    
+##  [7] time       <NA>       <NA>       <NA>       <NA>       <NA>      
 ## [13] <NA>       <NA>       <NA>       <NA>       <NA>       <NA>      
 ## [19] <NA>       <NA>      
 ## [1] "Cluster Membership"
 ## 
 ##  1  2  3  4  5 
-## 12  3 19 16  8 
+##  8 12 19 16  3 
 ## [1] "Within cluster sum of squares by cluster"
-## [1]  954.5833  797.3333 1147.1579  733.8125  760.3750
+## [1]  760.3750  954.5833 1147.1579  733.8125  797.3333
 {% endhighlight %}
  
 Membership of speeches in clusters is here:
@@ -391,9 +391,9 @@ inaug_km$cluster
 
 {% highlight text %}
 ## 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 
-##  4  4  5  4  4  4  4  1  1  1  4  1  5  2  2  4  3  1  5  4  4  4  1  5  1 
+##  4  4  1  4  4  4  4  2  2  2  4  2  1  5  5  4  3  2  1  4  4  4  2  1  2 
 ## 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 
-##  5  5  5  1  4  1  4  3  3  5  2  3  1  3  4  3  3  3  4  3  3  3  3  1  1 
+##  1  1  1  2  4  2  4  3  3  1  5  3  2  3  4  3  3  3  4  3  3  3  3  2  2 
 ## 63 64 65 66 67 68 69 70 
 ##  3  3  3  4  3  3  3  3
 {% endhighlight %}

@@ -56,7 +56,7 @@ The first thing you can do is plot the data, and the `plot` command makes that e
 plot(data_json)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-4](/figures/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-2](/figures//2016-12-11-r-geojson-srt.Rmdunnamed-chunk-2-1.png)
  
 Unfortunately, this plot is not very helpful because it simply plots the points without any context. So we use the `ggmap` and `ggplot2` package to give us some context. First, we download from Google the right map.
  
@@ -87,7 +87,7 @@ Now we can make the plot:
 print(mapImage + geom_point(aes(lon, lat), data = data_df))
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-7](/figures/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-5](/figures//2016-12-11-r-geojson-srt.Rmdunnamed-chunk-5-1.png)
  
 It may be helpful to add labels based on the name of the location, given in the 'title' field:
  
@@ -97,7 +97,7 @@ mapImage + geom_point(aes(lon, lat), data = data_df) + geom_text(aes(lon, lat,
     label = title, hjust = 0, vjust = 0.5), data = data_df, check_overlap = TRUE)
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-8](/figures/unnamed-chunk-8-1.png)
+![plot of chunk unnamed-chunk-6](/figures//2016-12-11-r-geojson-srt.Rmdunnamed-chunk-6-1.png)
  
 Here, I use `geom_text` to make the labels, and tweaked the options by hand using the help page.
  
