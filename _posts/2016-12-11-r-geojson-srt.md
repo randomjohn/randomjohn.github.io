@@ -42,24 +42,7 @@ data_file <- "srt_parking.geojson"
 # for some reason, I can't read from the url directly, though the tutorial
 # says I can
 download.file(data_url, data_file)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-Error in download.file(data_url, data_file): cannot open URL 'https://data.openupstate.org/maps/swamp-rabbit-trail/parking/geojson.php'
-{% endhighlight %}
-
-
-
-{% highlight r %}
 data_json <- geojson_read(data_file, what = "sp")
-{% endhighlight %}
-
-
-
-{% highlight text %}
-Error in rgdal::ogrListLayers(input): Cannot open data source
 {% endhighlight %}
  
 Theoretically, you can use `geojson_read` to get the data from the URL directly; however this seemed to fail for me. I'm not sure why doing the two-step process with `download.file` and then `geojson_read` works, but it is probably a good idea to download your data first in most cases. The `what="sp"` option in `geojson_read` is used to return the data in a spatial object. Now that the data is in a spatial object, we can analyze however we wish and forget about the original data format.
@@ -73,11 +56,7 @@ The first thing you can do is plot the data, and the `plot` command makes that e
 plot(data_json)
 {% endhighlight %}
 
-
-
-{% highlight text %}
-Error in plot(data_json): object 'data_json' not found
-{% endhighlight %}
+![plot of chunk unnamed-chunk-4](/figures/unnamed-chunk-4-1.png)
  
 Unfortunately, this plot is not very helpful because it simply plots the points without any context. So we use the `ggmap` and `ggplot2` package to give us some context. First, we download from Google the right map.
  
@@ -96,24 +75,7 @@ Now, we prepare our spatial object for plotting:
 
 {% highlight r %}
 data_df <- as.data.frame(data_json)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-Error in as.data.frame(data_json): object 'data_json' not found
-{% endhighlight %}
-
-
-
-{% highlight r %}
 names(data_df)[4:5] <- c("lon", "lat")
-{% endhighlight %}
-
-
-
-{% highlight text %}
-Error in names(data_df)[4:5] <- c("lon", "lat"): object 'data_df' not found
 {% endhighlight %}
  
 There's really no output from this. I suppose the renaming step isn't necessary, but I believe in descriptive labels.
@@ -125,11 +87,7 @@ Now we can make the plot:
 print(mapImage + geom_point(aes(lon, lat), data = data_df))
 {% endhighlight %}
 
-
-
-{% highlight text %}
-Error in fortify(data): object 'data_df' not found
-{% endhighlight %}
+![plot of chunk unnamed-chunk-7](/figures/unnamed-chunk-7-1.png)
  
 It may be helpful to add labels based on the name of the location, given in the 'title' field:
  
@@ -139,11 +97,7 @@ mapImage + geom_point(aes(lon, lat), data = data_df) + geom_text(aes(lon, lat,
     label = title, hjust = 0, vjust = 0.5), data = data_df, check_overlap = TRUE)
 {% endhighlight %}
 
-
-
-{% highlight text %}
-Error in fortify(data): object 'data_df' not found
-{% endhighlight %}
+![plot of chunk unnamed-chunk-8](/figures/unnamed-chunk-8-1.png)
  
 Here, I use `geom_text` to make the labels, and tweaked the options by hand using the help page.
  
