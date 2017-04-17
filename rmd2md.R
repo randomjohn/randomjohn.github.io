@@ -2,7 +2,8 @@
 #' .rmd by default) in the current working directory. Files with a status of
 #' 'processed' will be converted to markdown (with out_ext file extention, '.markdown'
 #' by default). It will change the published parameter to 'true' and change the
-#' status parameter to 'publish'.
+#' status parameter to 'publish'. Update 2/1/17: enabled a 'hold' status to disable processing
+#' even if process_all = TRUE. This is for drafts that you don't want as part of a site rebuild.
 #'
 #' @param path_site path to the local root storing the site files
 #' @param dir_rmd directory containing R Markdown files (inputs)
@@ -39,7 +40,7 @@ rmd2md <- function( path_site = getwd(),
         status <- unlist(strsplit(content[statusLine], ':'))[2]
         status <- sub('[[:space:]]+$', '', status)
         status <- sub('^[[:space:]]+', '', status)
-        if(tolower(status) == 'process' || process_all) {
+        if(tolower(status) == 'process' || (process_all && tolower(status)!='hold')) {
           #This is a bit of a hack but if a line has zero length (i.e. a
           #black line), it will be removed in the resulting markdown file.
           #This will ensure that all line returns are retained.
@@ -94,4 +95,4 @@ rmd2md <- function( path_site = getwd(),
   invisible()
 }
 
-rmd2md(process_all=TRUE)
+rmd2md(process_all=FALSE)
