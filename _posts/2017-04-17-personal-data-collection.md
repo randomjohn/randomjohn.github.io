@@ -66,7 +66,7 @@ library(dplyr)
 library(stringr)
 library(ggplot2)
  
-raw_file <- "cpap.txt"
+raw_file <- "_Rmd/cpap.txt"
  
 if (file.exists(raw_file)) {
   # file.copy(raw_file,backup_file,copy.date = TRUE)
@@ -106,12 +106,6 @@ if (file.exists(raw_file)) {
   cat("Oops! ",raw_file," does not exist!\n")
 }
 {% endhighlight %}
-
-
-
-{% highlight text %}
-## Oops!  cpap.txt  does not exist!
-{% endhighlight %}
  
 The commented out code above basically writes out the file to a CSV (for easier processing in the future if I need) and backs up the CSV file each time I run the analysis. (I run this analysis in an [R Studio](http://www.rstudio.com) R notebook.)
  
@@ -136,11 +130,7 @@ cpap_df %>% ggplot(aes(as.Date(date,origin="1970-1-1"),usage)) +
   scale_x_date(date_labels = "%b %d")
 {% endhighlight %}
 
-
-
-{% highlight text %}
-## Error in eval(expr, envir, enclos): object 'cpap_df' not found
-{% endhighlight %}
+![plot of chunk unnamed-chunk-1](/figures//2017-04-17-personal-data-collection.Rmdunnamed-chunk-1-1.png)
  
 No, you don't get to see the other stuff, how much I sleep is enough!
  
