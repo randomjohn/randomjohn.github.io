@@ -139,6 +139,18 @@ If you have the `maps` and `ggplot2` packages, you already have the data you nee
 
 {% highlight r %}
 library(ggplot2)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Want to understand how all the pieces fit together? Buy the
+## ggplot2 book: http://ggplot2.org/book/
+{% endhighlight %}
+
+
+
+{% highlight r %}
 sc_map <- map_data("county",region="south.carolina")
 ggplot() + geom_polygon(aes(x=long,y=lat,group=group),data=sc_map,colour="white",fill="black") + theme_minimal()
 {% endhighlight %}
@@ -152,18 +164,6 @@ Now we have the demographic data and the map, but merging the two will take a li
 
 {% highlight r %}
 library(dplyr)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning: Installed Rcpp (0.12.12) different from Rcpp used to build dplyr (0.12.11).
-## Please reinstall dplyr to avoid random crashes or undefined behavior.
-{% endhighlight %}
-
-
-
-{% highlight r %}
 library(stringr)
  
 merged <- as.data.frame(home_median_price@estimate) %>% 
