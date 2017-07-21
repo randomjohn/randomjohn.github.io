@@ -89,7 +89,7 @@ rmd2md <- function( path_site = getwd(),
         warning("Status not found in front matter.")
       }
     } else {
-      warning("No front matter found. Will not process this file. ")
+      warning("No front matter found. Will not process this file.")
     }
   }
   invisible()
