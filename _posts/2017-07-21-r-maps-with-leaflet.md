@@ -81,6 +81,9 @@ gvl_value %>%
 {% endhighlight %}
 
 ![plot of chunk unnamed-chunk-4](/figures//2017-07-21-r-maps-with-leaflet.Rmdunnamed-chunk-4-1.png)
+ 
+Unfortunately due to the limitations of Github pages this had to be turned into a static image to be rendered. Perhaps it's time to make the jump to blogdown and hugo like all the other cool kids?
+ 
 # Discussion
  
 I'm just starting to learn about the `leaflet` package, but in just a couple of hours (and standing on the shoulders of giants) I was able to put together an interactive map combining Census data (median home value by census tract) and locally-generated data (park locations). Such combinations can be effectively used to examine local situations in the context of rich data already collected at a federal level (assuming the instability at the U.S. Census Bureau is temporary).
