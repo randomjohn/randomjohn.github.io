@@ -80,32 +80,7 @@ gvl_value %>%
   addLayersControl(overlayGroups = c("Parks","Median home value"))
 {% endhighlight %}
 
-
-
-{% highlight text %}
-## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in normalizePath(path.expand(path), winslash, mustWork): path[1]=".
-## \webshot373038b9640a.png": The system cannot find the file specified
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in file(con, "rb"): cannot open file 'C:\Users\johnd\AppData\Local
-## \Temp\RtmpaiScuL\file373053433dd\webshot373038b9640a.png': No such file or
-## directory
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error in file(con, "rb"): cannot open the connection
-{% endhighlight %}
+![plot of chunk unnamed-chunk-4](/figures//2017-07-21-r-maps-with-leaflet.Rmdunnamed-chunk-4-1.png)
 # Discussion
  
 I'm just starting to learn about the `leaflet` package, but in just a couple of hours (and standing on the shoulders of giants) I was able to put together an interactive map combining Census data (median home value by census tract) and locally-generated data (park locations). Such combinations can be effectively used to examine local situations in the context of rich data already collected at a federal level (assuming the instability at the U.S. Census Bureau is temporary).
