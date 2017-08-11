@@ -88,23 +88,10 @@ The election data has a bit of an odd structure.
  
 
 {% highlight r %}
-knitr::kable(election_df %>% mutate(row=1:nrow(.)) %>% select(row,everything()) %>% slice(c(1:5,103:107)))
+DT::datatable(election_df %>% mutate(row=1:nrow(.)) %>% select(row,everything()) %>% slice(c(1:5,103:107)))
 {% endhighlight %}
 
-
-
-| row|county    |precinct        |office                       |district |party |candidate                                      | votes|
-|---:|:---------|:---------------|:----------------------------|:--------|:-----|:----------------------------------------------|-----:|
-|   1|Abbeville |Abbeville No. 1 |STRAIGHT PARTY               |NA       |DEM   |Democratic                                     |   139|
-|   2|Abbeville |Abbeville No. 2 |STRAIGHT PARTY               |NA       |DEM   |Democratic                                     |   248|
-|   3|Abbeville |Abbeville No. 3 |STRAIGHT PARTY               |NA       |DEM   |Democratic                                     |   134|
-|   4|Abbeville |Abbeville No. 4 |STRAIGHT PARTY               |NA       |DEM   |Democratic                                     |    82|
-|   5|Abbeville |Antreville      |STRAIGHT PARTY               |NA       |DEM   |Democratic                                     |    72|
-| 103|Abbeville |Lebanon         |STRAIGHT PARTY               |NA       |LIB   |Libertarian                                    |     1|
-| 104|Abbeville |Absentee        |STRAIGHT PARTY               |NA       |LIB   |Libertarian                                    |     4|
-| 105|Abbeville |Abbeville No. 1 |President and Vice President |NA       |DEM   |Hillary Rodham Clinton / Timothy Michael Kaine |   245|
-| 106|Abbeville |Abbeville No. 2 |President and Vice President |NA       |DEM   |Hillary Rodham Clinton / Timothy Michael Kaine |   373|
-| 107|Abbeville |Abbeville No. 3 |President and Vice President |NA       |DEM   |Hillary Rodham Clinton / Timothy Michael Kaine |   214|
+![plot of chunk unnamed-chunk-5](/figures//2017-08-04-how-we-voted-in-greenville-sc.Rmdunnamed-chunk-5-1.png)
  
 So the fancy stuff I did in `kable` above was basically to show the original row numbers and print them to the left of all the other variables. If I had not used the `select(row,everything())`, the row would have printed last. This is a nice example of how to do a quick custom column-sorting. But that's not why we're here. The election file shows how people voted in a rather raw fashion. Specifically, here I want to tally those people who voted for the different candidates for president. But it's not that straightforward, because I have to count the straight-ticket voters as well as the split-party voters who specifically noted their president's choice on the ballot.
  
@@ -116,18 +103,10 @@ total_pres_votes <- election_df %>%
   filter(office %in% c("STRAIGHT PARTY","President and Vice President")) %>% 
   group_by(precinct) %>% 
   summarize(total_votes=sum(votes,nm.ra=TRUE))
-knitr::kable(total_pres_votes %>% slice(1:5))
+DT::datatable(total_pres_votes)
 {% endhighlight %}
 
-
-
-|precinct        | total_votes|
-|:---------------|-----------:|
-|Abbeville No. 1 |        1250|
-|Abbeville No. 2 |        1054|
-|Abbeville No. 3 |         744|
-|Abbeville No. 4 |         611|
-|Abel            |         731|
+![plot of chunk unnamed-chunk-6](/figures//2017-08-04-how-we-voted-in-greenville-sc.Rmdunnamed-chunk-6-1.png)
  
 The first few results look ok, so we can get votes for the different parties and merge this back on to get the percentage.
  
@@ -150,23 +129,10 @@ total_party_votes <- election_df %>%
 
 
 {% highlight r %}
-knitr::kable(total_party_votes %>% ungroup() %>% slice(1:10))
+DT::datatable(total_party_votes)
 {% endhighlight %}
 
-
-
-|precinct        |party | total_party_votes| total_votes| party_perc|
-|:---------------|:-----|-----------------:|-----------:|----------:|
-|Abbeville No. 1 |DEM   |               385|        1250|   30.80000|
-|Abbeville No. 1 |REP   |               818|        1250|   65.44000|
-|Abbeville No. 2 |DEM   |               622|        1054|   59.01328|
-|Abbeville No. 2 |REP   |               407|        1054|   38.61480|
-|Abbeville No. 3 |DEM   |               349|         744|   46.90860|
-|Abbeville No. 3 |REP   |               375|         744|   50.40323|
-|Abbeville No. 4 |DEM   |               214|         611|   35.02455|
-|Abbeville No. 4 |REP   |               381|         611|   62.35679|
-|Abel            |DEM   |               418|         731|   57.18194|
-|Abel            |REP   |               241|         731|   32.96854|
+![plot of chunk unnamed-chunk-7](/figures//2017-08-04-how-we-voted-in-greenville-sc.Rmdunnamed-chunk-7-1.png)
  
 So one picky issue is worth mentioning here. This dataset counts absentee ballots as its own precinct (or their own precincts). Part of the joys of blogging is sweeping issues like this under the rug, but this can be the source of interesting analyses in their own right.
  
@@ -178,23 +144,10 @@ total_party_votes_wide <- total_party_votes %>%
   select(-total_party_votes,-total_party_votes) %>% 
   group_by(precinct) %>% 
   spread(key=party,value=party_perc)
-knitr::kable(total_party_votes_wide %>% ungroup() %>%  slice(1:10))
+DT::datatable(total_party_votes_wide )
 {% endhighlight %}
 
-
-
-|precinct            | total_votes|      DEM|      REP|
-|:-------------------|-----------:|--------:|--------:|
-|Abbeville No. 1     |        1250| 30.80000| 65.44000|
-|Abbeville No. 2     |        1054| 59.01328| 38.61480|
-|Abbeville No. 3     |         744| 46.90860| 50.40323|
-|Abbeville No. 4     |         611| 35.02455| 62.35679|
-|Abel                |         731| 57.18194| 32.96854|
-|Abner Creek Baptist |        1221| 15.88862| 80.26208|
-|Absentee            |      521425| 50.41051| 47.02555|
-|Absentee 1          |       56422| 50.27117| 47.29184|
-|ABSENTEE 1          |       29495| 46.50958| 50.18478|
-|Absentee 2          |      107903| 55.46278| 42.20457|
+![plot of chunk unnamed-chunk-8](/figures//2017-08-04-how-we-voted-in-greenville-sc.Rmdunnamed-chunk-8-1.png)
  
 There were some casualties in this operation, namely the total party votes and total votes, but I don't really need them for the simple thing I'm doing here.
  
