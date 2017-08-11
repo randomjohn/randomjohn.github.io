@@ -1,6 +1,6 @@
 ---
-layout:post
-title: "How we voted in Greenville SC"
+layout: post
+title: "How we voted in South Carolina"
 author: "John Johnson"
 date: "August 4, 2017"
 status: publish
