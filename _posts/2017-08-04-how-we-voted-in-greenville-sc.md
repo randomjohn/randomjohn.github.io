@@ -232,32 +232,7 @@ precinct_elect %>%
               opacity = 1)
 {% endhighlight %}
 
-
-
-{% highlight text %}
-## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in normalizePath(path.expand(path), winslash, mustWork): path[1]=".
-## \webshot30ac5941351b.png": The system cannot find the file specified
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in file(con, "rb"): cannot open file 'C:\Users\johnd\AppData\Local
-## \Temp\RtmpiA0LVu\file30ac53fd670b\webshot30ac5941351b.png': No such file or
-## directory
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error in file(con, "rb"): cannot open the connection
-{% endhighlight %}
+![plot of chunk unnamed-chunk-10](/figures//2017-08-04-how-we-voted-in-greenville-sc.Rmdunnamed-chunk-10-1.png)
  
 Now there are a few things to note:
 * In this blog post, the map is static. If you actually run this code in RStudio, it will be an interactive map that lets you zoom and pan, and where clicking areas will give you the precinct name.
